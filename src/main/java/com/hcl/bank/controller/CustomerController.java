@@ -1,9 +1,12 @@
 package com.hcl.bank.controller;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,7 +26,7 @@ public class CustomerController {
 	private CustomerService customerService;
 
 	@PostMapping("/customer")
-	public ResponseEntity<Object> addCustomer(@RequestBody CustomerBean customerBean) {
+	public ResponseEntity<Object> addCustomer(@Valid @RequestBody CustomerBean customerBean) {
 		Object custBean = customerService.addCustomer(customerBean);
 		return new ResponseEntity<>(custBean, HttpStatus.CREATED);
 	}
